@@ -8,7 +8,7 @@ yarn install
 
 To start the service:
 ```
-yarn start
+yarn run start
 ```
 Service default address is: http://localhost:3000
 
