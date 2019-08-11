@@ -1,12 +1,14 @@
 import { Schema, model } from 'mongoose';
+import { OccurenceSchema } from './occurence';
 
 const ExerciseSchema = new Schema({
   name: { type: String, required: true },
-  muscle_group: { type: String },
+  muscleGroup: { type: String },
   repititions: { type: String },
-  sets: { type: String }
+  sets: { type: String },
+  occurences: [ OccurenceSchema ]
 });
 
-const Exercise = model("Exercise", ExerciseSchema);
+const Exercise = model('Exercise', ExerciseSchema);
 
 export default { ExerciseSchema, Exercise };

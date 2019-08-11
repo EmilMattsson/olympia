@@ -2,12 +2,21 @@ import express from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import mongoose from 'mongoose';
+
+import config from './config/config';
 
 import indexRouter from './routes/index';
 import usersRouter from './routes/users';
 
 const app = express();
 
+// connect to mongodb ASAP
+mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
+  .then(() => console.log('Succesfully connected to database.'))
+  .catch(error => console.log(error));
+
+  // other config
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

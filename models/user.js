@@ -9,4 +9,4 @@ const UserSchema = new Schema({
   workouts: [ WorkoutSchema ]
 });
 
-export default User = model("User", UserSchema);
+export default User = model('User', UserSchema);
