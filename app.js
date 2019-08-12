@@ -13,7 +13,7 @@ const app = express();
 
 // connect to mongodb ASAP
 mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
-  .then(() => console.log('Succesfully connected to database.'))
+  .then(() => console.log('Successfully connected to database.'))
   .catch(error => console.log(error));
 
   // other config
