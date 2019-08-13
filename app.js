@@ -3,6 +3,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
+import helmet from 'helmet';
 
 import config from './config/config';
 
@@ -16,6 +17,7 @@ mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
   .then(() => console.log('Successfully connected to database.'))
   .catch(error => console.log(error));
 
+app.use(helmet);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
