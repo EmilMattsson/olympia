@@ -24,7 +24,6 @@ router.post('/', (req, res, next) => {
     if (err) console.log(err);
   });
 
-  // TODO return user id
   res.status(201).send(`User created ${user._id}`);
 });
 
