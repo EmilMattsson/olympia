@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose';
-import WorkoutSchema from './workout';
+import { WorkoutSchema } from './workout';
 
 const UserSchema = new Schema({
   username: { type: String, required: true },
@@ -10,4 +10,6 @@ const UserSchema = new Schema({
   workouts: [ WorkoutSchema ]
 });
 
-export default User = model('User', UserSchema);
+const User = model('User', UserSchema);
+
+export default User;

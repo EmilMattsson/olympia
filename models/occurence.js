@@ -1,10 +1,8 @@
 import { Schema, model } from 'mongoose';
 
-const OccurenceSchema = new Schema({
+export const OccurenceSchema = new Schema({
   weight: { type: Number },
-  date: { type: Date.now() }
+  date: { type: Date }
 });
 
-const Occurence = model('Occurence', OccurenceSchema);
-
-export default { OccurenceSchema, Occurence };
+export const Occurence = model('Occurence', OccurenceSchema);
