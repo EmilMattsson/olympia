@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-// loads environment variables from .env file
+// loads environment variables from .env file in root folder
 dotenv.config();
 
 const config = {

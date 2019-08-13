@@ -16,7 +16,6 @@ mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
   .then(() => console.log('Successfully connected to database.'))
   .catch(error => console.log(error));
 
-  // other config
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
