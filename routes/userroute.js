@@ -12,13 +12,13 @@ router.get( '/', ( req, res, next ) => {
 router.post( '/', ( req, res, next ) => {
   console.log( req.body );
   // TODO create middleware for validation
-  const unverifiedUserData = req.body;
+  const newUserData = req.body;
 
   // TODO verify userData, create a new user, and save to mongodb
   const user = new User( {
-    username: unverifiedUserData.username,
-    password: unverifiedUserData.password,
-    email: unverifiedUserData.email
+    username: newUserData.username,
+    password: newUserData.password,
+    email: newUserData.email
   } );
 
   user.save( err => {
