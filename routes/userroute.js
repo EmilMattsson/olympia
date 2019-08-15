@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import User from '../models/user';
+import {User} from '../models';
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
@@ -20,10 +20,10 @@ router.post('/', (req, res, next) => {
     password: unverifiedUserData.password,
     email:    unverifiedUserData.email
   });
+  
   user.save((err) => {
     if (err) console.log(err);
   });
-
   res.status(201).send(`User created ${user._id}`);
 });
 

@@ -7,8 +7,7 @@ import helmet from 'helmet';
 
 import config from './config/config';
 
-import indexRouter from './routes/index';
-import usersRouter from './routes/users';
+import {usersRouter, main} from './routes';
 
 const app = express();
 
@@ -24,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 export default app;
