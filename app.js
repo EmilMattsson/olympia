@@ -7,23 +7,24 @@ import helmet from 'helmet';
 
 import config from './config/config';
 
-import {usersRouter, main} from './routes';
+import { ROUTER } from './routes';
 
-const app = express();
+const APP = express();
 
 // connect to mongodb ASAP
-mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
-  .then(() => console.log('Successfully connected to database.'))
-  .catch(error => console.log(error));
+mongoose
+  .connect( config.db.connectionString, { useNewUrlParser: true } )
+  .then( () => console.log( 'Successfully connected to database.' ) )
+  .catch( error => console.log( error ) );
 
-app.use(helmet);
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+APP.use( helmet );
+APP.use( logger( 'dev' ) );
+APP.use( express.json() );
+APP.use( express.urlencoded( { extended: false } ) );
+APP.use( cookieParser() );
+APP.use( express.static( path.join( __dirname, 'public' ) ) );
 
-// app.use('/', indexRouter);
+APP.use( '/', ROUTER );
 // app.use('/users', usersRouter);
 
-export default app;
+export default APP;

@@ -34,7 +34,10 @@
     },
     "rules": {
       "semi": "error",
-      "no-undef": "error"
+      "quotes": ["error", "single"],
+      "no-undef": "error",
+      "space-in-parens": ["error", "always"],
+      "comma-dangle": ["error", "never"]
     }
   }
 }
