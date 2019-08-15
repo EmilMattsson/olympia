@@ -43,6 +43,7 @@
       "comma-dangle": ["error", "never"],
       "no-var": "error",
       "eol-last": ["error", "never"],
+      "no-trailing-spaces": "error",
       "skipBlankLines": "false"
     }
   }
