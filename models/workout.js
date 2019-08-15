@@ -9,4 +9,4 @@ export const WorkoutSchema = new Schema( {
   exercises: [ExerciseSchema]
 } );
 
-export const Workout = model( 'Workout', WorkoutSchema );
+export const Workout = model('Workout', WorkoutSchema);

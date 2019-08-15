@@ -2,14 +2,14 @@ import { Schema, model } from 'mongoose';
 import { WorkoutSchema } from './workout';
 import validator from 'validator';
 
-const UserSchema = new Schema({
+const USER_SCHEMA = new Schema( {
   email: {
     type: String,
     required: true,
     trim: true,
     validate: {
-      validator: (e) => {
-        validator.isEmail(e);
+      validator: e => {
+        // use predefined email validator?
       }
     }
   },
@@ -35,13 +35,11 @@ const UserSchema = new Schema({
       }
     }
   },
-  workouts: [ WorkoutSchema ]
-}).pre('save', (next) => {
-  
-});
+  workouts: [WorkoutSchema]
+} ).pre('save', next => {} );
 
 const isAlphabetical = (str) => {
   return /^[A-Za-z]+$/.test(str);
 };
 
-export const User = model('User', UserSchema);
+export const User = model('User', USER_SCHEMA);
