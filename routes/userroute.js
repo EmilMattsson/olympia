@@ -1,32 +1,33 @@
 import express from 'express';
-const router = express.Router();
+const USER_ROUTER = express.Router();
 
 import { User } from '../models';
 
 /* GET users listing. */
-router.get('/', (req, res, next) => {
+USER_ROUTER.get('/', (req, res, next) => {
   res.send('These are not the users you are looking for..');
-});
+} );
 
 // Add new user
-router.post('/', (req, res, next) => {
+USER_ROUTER.post('/', (req, res, next) => {
   console.log(req.body);
   // TODO create middleware for validation
-  const newUserData = req.body;
 
+  const UNVERIFIED_USER_DATA = req.body;
   // TODO verify userData, create a new user, and save to mongodb
-  const user = new User({
-    username: newUserData.username,
-    password: newUserData.password,
-    email: newUserData.email
-  });
+  const USER = new User( {
+    username: UNVERIFIED_USER_DATA.username,
+    password: UNVERIFIED_USER_DATA.password,
+    email: UNVERIFIED_USER_DATA.email
+  } );
 
-  user.save(err => {
+  USER.save(err => {
+    console.log('lol');
     if (err) console.log(err);
-  });
-  res.status(201).send(`User created ${user._id}`);
-});
+  } );
+  res.status(201).send(`User created ${USER._id}`);
+} );
 
-router.get('/:userId', (req, res, next) => {});
+USER_ROUTER.get('/:userId', (req, res, next) => {} );
 
-export default router;
+export { USER_ROUTER };

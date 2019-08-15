@@ -40,10 +40,8 @@
         "single"
       ],
       "no-undef": "error",
-      "comma-dangle": [
-        "error",
-        "never"
-      ]
+      "comma-dangle": ["error", "never"],
+      "no-var": "error"
     }
   }
 }

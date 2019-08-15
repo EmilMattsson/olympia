@@ -4,11 +4,10 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 import helmet from 'helmet';
-import usersRouter from './routes/userroute';
 
 import config from './config/config';
 
-import { ROUTER } from './routes';
+import { ROUTER, USER_ROUTER } from './routes';
 
 const APP = express();
 
@@ -21,11 +20,11 @@ mongoose
 APP.use(helmet());
 APP.use(logger('dev'));
 APP.use(express.json());
-APP.use(express.urlencoded({ extended: false }));
+APP.use(express.urlencoded( { extended: false } ));
 APP.use(cookieParser());
 APP.use(express.static(path.join(__dirname, 'public')));
 
 APP.use('/', ROUTER);
-APP.use('/users', usersRouter);
+APP.use('/users', USER_ROUTER);
 
 export default APP;

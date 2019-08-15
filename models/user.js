@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import { WorkoutSchema } from './workout';
 import validator from 'validator';
 
-const UserSchema = new Schema({
+const USER_SCHEMA = new Schema( {
   email: {
     type: String,
     required: true,
@@ -42,4 +42,4 @@ const isAlphabetical = str => {
   return /^[A-Za-z]+$/.test(str);
 };
 
-export const User = model('User', UserSchema);
+export const User = model('User', USER_SCHEMA);
