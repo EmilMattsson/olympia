@@ -41,7 +41,9 @@
       ],
       "no-undef": "error",
       "comma-dangle": ["error", "never"],
-      "no-var": "error"
+      "no-var": "error",
+      "eol-last": ["error", "never"],
+      "skipBlankLines": "false"
     }
   }
 }

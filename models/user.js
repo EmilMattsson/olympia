@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose';
 import { WorkoutSchema } from './workout';
 import validator from 'validator';
 
-const USER_SCHEMA = new Schema( {
+const USER_SCHEMA = new Schema({
   email: {
     type: String,
     required: true,

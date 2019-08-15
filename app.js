@@ -20,7 +20,7 @@ mongoose
 APP.use(helmet());
 APP.use(logger('dev'));
 APP.use(express.json());
-APP.use(express.urlencoded( { extended: false } ));
+APP.use(express.urlencoded({ extended: false }));
 APP.use(cookieParser());
 APP.use(express.static(path.join(__dirname, 'public')));
 
