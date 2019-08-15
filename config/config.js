@@ -8,7 +8,10 @@ const config = {
     port: parseInt(process.env.PORT) || 3000
   },
   db: {
-    connectionString: `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds261377.mlab.com:61377/olympia` || 'localhost'
+    connectionString:
+      `mongodb://${process.env.DB_USER}:${
+        process.env.DB_PASSWORD
+      }@ds261377.mlab.com:61377/olympia` || 'localhost'
   }
 };
 

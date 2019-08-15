@@ -8,7 +8,7 @@ const UserSchema = new Schema({
     required: true,
     trim: true,
     validate: {
-      validator: (e) => {
+      validator: e => {
         validator.isEmail(e);
       }
     }
@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     type: String,
     trim: true,
     validate: {
-      validator: (f) => {
+      validator: f => {
         return isAlphabetical(f) && f.length > 0 && f.length < 50;
       }
     }
@@ -30,17 +30,15 @@ const UserSchema = new Schema({
     type: String,
     trim: true,
     validate: {
-      validator: (l) => {
+      validator: l => {
         return isAlphabetical(l) && l.length > 0 && l.length < 50;
       }
     }
   },
-  workouts: [ WorkoutSchema ]
-}).pre('save', (next) => {
-  
-});
+  workouts: [WorkoutSchema]
+}).pre('save', next => {});
 
-const isAlphabetical = (str) => {
+const isAlphabetical = str => {
   return /^[A-Za-z]+$/.test(str);
 };
 
