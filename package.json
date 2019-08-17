@@ -44,7 +44,9 @@
       "no-var": "error",
       "eol-last": ["error", "never"],
       "no-trailing-spaces": "error",
-      "skipBlankLines": "false"
+      "skipBlankLines": "false",
+      "prefer-const": "error",
+      "no-magic-numbers": ["error", { "detectObjects": true }]
     }
   }
 }
