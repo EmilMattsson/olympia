@@ -2,6 +2,7 @@ import express from 'express';
 const USER_ROUTER = express.Router();
 
 import { User } from '../models';
+import { CREATED } from '../models/httpStatusCodes';
 
 /* GET users listing. */
 USER_ROUTER.get('/', (req, res, next) => {
@@ -11,7 +12,6 @@ USER_ROUTER.get('/', (req, res, next) => {
 // Add new user
 USER_ROUTER.post('/', (req, res, next) => {
   console.log(req.body);
-  // TODO create middleware for validation
 
   const NEW_USER_DATA = req.body;
   // TODO verify userData, create a new user, and save to mongodb
@@ -25,7 +25,7 @@ USER_ROUTER.post('/', (req, res, next) => {
     console.log('lol');
     if (err) console.log(err);
   });
-  res.status(201).send(`User created ${USER._id}`);
+  res.status(CREATED).send(`User created ${USER._id}`);
 });
 
 USER_ROUTER.get('/:userId', (req, res, next) => {});

@@ -3,9 +3,11 @@ import dotenv from 'dotenv';
 // loads environment variables from .env file in root folder
 dotenv.config();
 
+const DEFAULT_PORT = 3000;
+
 const config = {
   app: {
-    port: parseInt(process.env.PORT) || 3000
+    port: parseInt(process.env.PORT) || DEFAULT_PORT
   },
   db: {
     connectionString:
