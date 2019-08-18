@@ -8,6 +8,7 @@ import helmet from 'helmet';
 import config from './config/config';
 
 import { ROUTER, USER_ROUTER } from './routes';
+import { logErrors } from './middleware/errorHandler';
 
 const APP = express();
 
@@ -26,5 +27,7 @@ APP.use(express.static(path.join(__dirname, 'public')));
 
 APP.use('/', ROUTER);
 APP.use('/users', USER_ROUTER);
+
+APP.use(logErrors);
 
 export default APP;
