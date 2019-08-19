@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 import { WorkoutSchema } from './workout';
 
-const USER_SCHEMA = new Schema({
+export const USER_SCHEMA = new Schema({
   email: {
     type: String,
     required: true,
@@ -22,4 +22,4 @@ const USER_SCHEMA = new Schema({
   workouts: [WorkoutSchema]
 });
 
-export const User = model('User', USER_SCHEMA);
+export const USER_MODEL = model('User', USER_SCHEMA);
