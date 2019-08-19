@@ -8,6 +8,7 @@
     "start": "yarn run build && nodemon build/bin/www"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.0.0",
@@ -40,13 +41,24 @@
         "single"
       ],
       "no-undef": "error",
-      "comma-dangle": ["error", "never"],
+      "comma-dangle": [
+        "error",
+        "never"
+      ],
       "no-var": "error",
-      "eol-last": ["error", "never"],
+      "eol-last": [
+        "error",
+        "never"
+      ],
       "no-trailing-spaces": "error",
       "skipBlankLines": "false",
       "prefer-const": "error",
-      "no-magic-numbers": ["error", { "detectObjects": true }]
+      "no-magic-numbers": [
+        "error",
+        {
+          "detectObjects": true
+        }
+      ]
     }
   }
 }
