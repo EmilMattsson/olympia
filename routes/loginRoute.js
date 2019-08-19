@@ -5,4 +5,4 @@ LOGIN_ROUTER.get('/', (req, res, next) => {
   res.send('LOGIN');
 });
 
-export default LOGIN_ROUTER;
+export { LOGIN_ROUTER };
