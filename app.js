@@ -9,7 +9,7 @@ import config from './config/config';
 
 import { LOGIN_ROUTER, ROUTER, USER_ROUTER } from './routes';
 import { validateUserEmailAndPassword } from './middleware/validator';
-import { logErrors } from './middleware/errorHandler';
+import { errorLogger, errorHandler } from './middleware/errorHandler';
 
 const APP = express();
 
@@ -30,6 +30,7 @@ APP.use('/', ROUTER);
 APP.use('/login', validateUserEmailAndPassword, LOGIN_ROUTER);
 APP.use('/users', USER_ROUTER);
 
-APP.use(logErrors);
+APP.use(errorLogger);
+APP.use(errorHandler);
 
 export default APP;

@@ -1,9 +1,14 @@
-export const logErrors = (err, req, res, next) => {
+import { INTERNAL_SERVER_ERROR } from '../models/httpStatusCodes';
+
+export const errorLogger = (err, req, res, next) => {
   console.error(err.stack);
   next(err);
 };
 
-export const handleError = (err, req, res, next) => {
-  res.status(500).send('Something broke');
-  next(err);
+export const errorHandler = (err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err);
+  }
+  res.status(INTERNAL_SERVER_ERROR);
+  res.json({ error: err });
 };

@@ -13,23 +13,25 @@ USER_ROUTER.get('/', (req, res, next) => {
 
 // Create new user
 USER_ROUTER.post('/create', (req, res, next) => {
-  console.log(req.body);
   const NEW_USER_EMAIL = req.body.email;
   const PLAIN_USER_PASSWORD = req.body.password;
 
   const SALT_ROUNDS = 10;
-  let user;
   bcrypt.hash(PLAIN_USER_PASSWORD, SALT_ROUNDS).then(ENCRYPTED_PASSWORD => {
-    user = new LOGIN_MODEL({
+
+    const USER = new LOGIN_MODEL({
       email: NEW_USER_EMAIL,
       password: ENCRYPTED_PASSWORD
     });
-  }).catch(err => console.error(err));
 
-  user.save(err => {
-    if (err) console.error(err);
-  });
-  res.status(CREATED).send(`User created ${user._id}`);
+    USER.save(err => {
+      if (err) {
+        next(err);
+      } else {
+        res.status(CREATED).send(`User created ${USER._id}`);
+      }
+    });
+  }).catch(err => next(err));
 });
 
 USER_ROUTER.get('/:userId', (req, res, next) => {});
