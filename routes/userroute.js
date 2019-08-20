@@ -17,9 +17,9 @@ USER_ROUTER.post('/create', (req, res, next) => {
   const NEW_USER_EMAIL = req.body.email;
   const PLAIN_USER_PASSWORD = req.body.password;
 
-  const saltRounds = 10;
+  const SALT_ROUNDS = 10;
   let user;
-  bcrypt.hash(PLAIN_USER_PASSWORD, saltRounds).then(ENCRYPTED_PASSWORD => {
+  bcrypt.hash(PLAIN_USER_PASSWORD, SALT_ROUNDS).then(ENCRYPTED_PASSWORD => {
     user = new LOGIN_MODEL({
       email: NEW_USER_EMAIL,
       password: ENCRYPTED_PASSWORD
