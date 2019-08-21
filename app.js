@@ -14,11 +14,11 @@ import { errorLogger, errorHandler } from './middleware/errorHandler';
 const APP = express();
 
 // connect to mongodb ASAP
-mongoose
-  .connect(config.db.connectionString, { useNewUrlParser: true })
+mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
   .then(() => console.log('Successfully connected to database.'))
-  .catch(error => console.log(error));
+  .catch(err => console.error(err));
 
+// general config
 APP.use(helmet());
 APP.use(logger('dev'));
 APP.use(express.json());
@@ -26,10 +26,12 @@ APP.use(express.urlencoded({ extended: false }));
 APP.use(cookieParser());
 APP.use(express.static(path.join(__dirname, 'public')));
 
+// routes config
 APP.use('/', ROUTER);
 APP.use('/login', validateUserEmailAndPassword, LOGIN_ROUTER);
 APP.use('/users', USER_ROUTER);
 
+// error middleware
 APP.use(errorLogger);
 APP.use(errorHandler);
 
