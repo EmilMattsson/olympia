@@ -9,12 +9,12 @@ LOGIN_ROUTER.get('/', (req, res, next) => {
 
 LOGIN_ROUTER.post('/', (req, res, next) => {
   const UNVERIFIED_USER_PASSWORD = '$2b$10$FDFzSDOGdCQ2G5tU8Rq67OTECVcm3KbOajmJ9KYCdv4PfEQTiWos.';
-  const LOGIN_RESPONSE = LOGIN_SERVICE.findOneByEmail('hansmikael92@gmail.com');
+  const LOGIN_RESPONSE = LOGIN_SERVICE.findUserByEmail('hansmikael92@gmail.com');
 
   LOGIN_RESPONSE.then(res => {
     const USER = res;
 
-    LOGIN_SERVICE.isValidPassword(USER, UNVERIFIED_USER_PASSWORD).then(
+    LOGIN_SERVICE.passwordIsValid(USER, UNVERIFIED_USER_PASSWORD).then(
       passwordResponse => {
         if (passwordResponse) {
           console.log('PW was valid, reroute');
