@@ -11,6 +11,7 @@ export const LOGIN_SERVICE = {
       throw new Error(`User with email: ${email} does not exist.`);
     }
   },
+
   findUserByEmail: async email => {
     const LOGIN_EXISTS = await LOGIN_MODEL.findOne(
       { email: email },
@@ -24,7 +25,19 @@ export const LOGIN_SERVICE = {
 
     return LOGIN_EXISTS;
   },
+
   passwordIsValid: async (user, password) => {
-    return await bcrypt.compare(user.password, password);   
+    return await bcrypt.compare(user.password, password);
+  },
+
+
+  createLogin: async (email, password, passwordConfirm) => {
+    const USER = findUserByEmail(email);
+
+    if (USER !== null) {
+      return passwordIsValid(password);
+    } else {
+      throw new Error(`User with email: ${email} does not exist.`);
+    }
   }
 };

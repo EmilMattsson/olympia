@@ -1,5 +1,5 @@
 import express from 'express';
-import { LOGIN_SERVICE } from '../services';
+import { LOGIN_API } from '../api/loginApi';
 
 const LOGIN_ROUTER = express.Router();
 
@@ -8,25 +8,16 @@ LOGIN_ROUTER.get('/', (req, res, next) => {
 });
 
 LOGIN_ROUTER.post('/', (req, res, next) => {
-  const UNVERIFIED_USER_PASSWORD = '$2b$10$FDFzSDOGdCQ2G5tU8Rq67OTECVcm3KbOajmJ9KYCdv4PfEQTiWos.';
-  const LOGIN_RESPONSE = LOGIN_SERVICE.findUserByEmail('hansmikael92@gmail.com');
+  try {
+    const LOGIN_PROMISE = LOGIN_API.loginUser(req, res, next);
 
-  LOGIN_RESPONSE.then(res => {
-    const USER = res;
-
-    LOGIN_SERVICE.passwordIsValid(USER, UNVERIFIED_USER_PASSWORD).then(
-      passwordResponse => {
-        if (passwordResponse) {
-          console.log('PW was valid, reroute');
-          res.redirect(`/users/:${USER._id}`);
-        } else {
-          console.log('Invalid password', USER.password, UNVERIFIED_USER_PASSWORD);
-        }
-      }
-    );
-  }).catch(err => {
+    LOGIN_PROMISE.then(response => {
+      const USER = response;
+      USER.redirect(`/users/:${USER._id}`);
+    });
+  } catch (err) {
     console.log('432', err);
-  });
+  }
 });
 
 export { LOGIN_ROUTER };
