@@ -4,8 +4,10 @@
   "private": true,
   "sourceType": "module",
   "scripts": {
+    "babel-node": "babel-node --presets=@babel/preset-env --ignore='foo|bar|baz'",
+    "serve": "nodemon --exec yarn run babel-node -- build/bin/www",
     "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start": "yarn run build && nodemon build/bin/www"
+    "start": "yarn run build && node build/bin/www"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -16,12 +18,12 @@
     "helmet": "^3.20.0",
     "mongoose": "^5.6.9",
     "morgan": "~1.9.1",
-    "nodemon": "^1.19.1",
     "validator": "^11.1.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
     "rimraf": "^2.6.3"
   },
   "eslintConfig": {

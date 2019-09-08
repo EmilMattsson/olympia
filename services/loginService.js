@@ -1,23 +1,30 @@
 import bcrypt from 'bcrypt';
 import { LOGIN_MODEL } from '../models';
-import { Error } from 'mongoose';
 
 export const LOGIN_SERVICE = {
-  findOneByEmail: async email => {
+  validateLogin: async (email, password) => {
+    const USER = findUserByEmail(email);
+
+    if (USER !== null) {
+      return passwordIsValid(password);
+    } else {
+      throw new Error(`User with email: ${email} does not exist.`);
+    }
+  },
+  findUserByEmail: async email => {
     const LOGIN_EXISTS = await LOGIN_MODEL.findOne(
       { email: email },
       (err, user) => {
         if (err) {
           throw Error(err);
         }
+        return user;
       }
     );
 
-    bcrypt.hash('bob', 10).then((e )=> console.log(e) );
-
     return LOGIN_EXISTS;
   },
-  isValidPassword: async (user, password) => {
+  passwordIsValid: async (user, password) => {
     return await bcrypt.compare(user.password, password);   
   }
 };
