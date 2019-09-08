@@ -13,7 +13,7 @@ LOGIN_ROUTER.post('/', (req, res, next) => {
 
     LOGIN_PROMISE.then(response => {
       const USER = response;
-      USER.redirect(`/users/:${USER._id}`);
+      // USER.redirect(`/users/:${USER._id}`);
     });
   } catch (err) {
     console.log('432', err);

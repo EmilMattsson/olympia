@@ -3,23 +3,23 @@ import { LOGIN_MODEL } from '../models';
 
 export const LOGIN_SERVICE = {
   validateLogin: async (email, password) => {
-    const USER = findUserByEmail(email);
-
+    const USER = await LOGIN_SERVICE.findLoginByEmail(email);
     if (USER !== null) {
-      return passwordIsValid(password);
+      return  LOGIN_SERVICE.passwordIsValid(USER, password);
     } else {
       throw new Error(`User with email: ${email} does not exist.`);
     }
   },
 
-  findUserByEmail: async email => {
+  findLoginByEmail: async email => {
     const LOGIN_EXISTS = await LOGIN_MODEL.findOne(
-      { email: email },
-      (err, user) => {
+      {
+        email: email
+      },
+      (err, login) => {
         if (err) {
           throw Error(err);
         }
-        return user;
       }
     );
 
@@ -29,7 +29,6 @@ export const LOGIN_SERVICE = {
   passwordIsValid: async (user, password) => {
     return await bcrypt.compare(user.password, password);
   },
-
 
   createLogin: async (email, password, passwordConfirm) => {
     const USER = findUserByEmail(email);
