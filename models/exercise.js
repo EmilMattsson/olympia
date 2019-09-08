@@ -9,12 +9,6 @@ export const ExerciseSchema = new Schema({
   muscleGroup: {
     type: String
   },
-  repititions: {
-    type: String
-  },
-  sets: {
-    type: String
-  },
   occurences: [ OccurenceSchema ]
 });
 

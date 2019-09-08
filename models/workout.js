@@ -6,7 +6,7 @@ export const WorkoutSchema = new Schema({
     type: String,
     required: true
   },
-  exercises: [ExerciseSchema]
+  exercises: [ ExerciseSchema ]
 });
 
 export const Workout = model('Workout', WorkoutSchema);
