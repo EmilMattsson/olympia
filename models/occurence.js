@@ -4,8 +4,15 @@ export const OccurenceSchema = new Schema({
   weight: {
     type: Number
   },
+  repititions: {
+    type: String
+  },
+  sets: {
+    type: String
+  },
   date: {
-    type: Date
+    type: Date,
+    default: Date.now()
   }
 });
 
