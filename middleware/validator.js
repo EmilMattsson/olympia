@@ -22,6 +22,6 @@ const validatePassword = password => {
   }
 };
 
-const isAlphabetical = str => {
+export const isAlphabetical = str => {
   return /^[A-Za-z]+$/.test(str);
 };
