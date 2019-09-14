@@ -2,7 +2,7 @@ import validator from 'validator';
 
 import { isAlphabetical, stringIsNullOrUndefined } from '../middleware/validator';
 
-test('checks if string is alphabetical or not', () => {
+test('check if string is alphabetical or not', () => {
   // Positive tests
   expect(isAlphabetical('string')).toBe(true);
 
@@ -23,7 +23,7 @@ test('check if string is an email', () => {
   expect(validator.isEmail('')).toBe(false);
 });
 
-test('checks if string is empty', () => {
+test('check if string is empty', () => {
   // Positive tests
   expect(validator.isEmpty('')).toBe(true);
 
@@ -34,7 +34,7 @@ test('checks if string is empty', () => {
   expect(validator.isEmpty('\n')).toBe(false);
 });
 
-test('checks if string is not null or undefined', () => {
+test('check if string is not null or undefined', () => {
   // Positive tests
   expect(stringIsNullOrUndefined('')).toBe(undefined);
 
