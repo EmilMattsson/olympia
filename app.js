@@ -6,7 +6,6 @@ import mongoose from 'mongoose';
 import helmet from 'helmet';
 
 import config from './config/config';
-
 import { LOGIN_ROUTER, ROUTER, USER_ROUTER } from './routes';
 import { validateUserEmailAndPassword } from './middleware/validator';
 import { errorLogger, errorHandler } from './middleware/errorHandler';
@@ -14,7 +13,8 @@ import { errorLogger, errorHandler } from './middleware/errorHandler';
 const APP = express();
 
 // connect to mongodb ASAP
-mongoose.connect(config.db.connectionString, { useNewUrlParser: true })
+mongoose
+  .connect(config.db.connectionString, { useNewUrlParser: true })
   .then(() => console.log('Successfully connected to database.'))
   .catch(err => console.error(err));
 

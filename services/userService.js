@@ -1,28 +1,15 @@
 import bcrypt from 'bcrypt';
-import { LOGIN_MODEL } from '../models';
+import { USER_MODEL } from '../models';
 
-export const LOGIN_SERVICE = {
-  validateLogin: async (email, password) => {
-    const USER = findUserByEmail(email);
-
-    if (USER !== null) {
-      return passwordIsValid(password);
-    } else {
-      throw new Error(`User with email: ${email} does not exist.`);
-    }
-  },
-
+export const USER_SERVICE = {
   findUserByEmail: async email => {
-    const LOGIN_EXISTS = await LOGIN_MODEL.findOne(
-      { email: email },
-      (err, user) => {
-        if (err) {
-          throw Error(err);
-        }
-        return user;
+    const USER = await USER_MODEL.findOne({ email: email }, (err, user) => {
+      if (err) {
+        throw Error(`Could not find user with email: ${email}`);
       }
-    );
+      return user;
+    });
 
-    return LOGIN_EXISTS;
-  },
+    return USER;
+  }
 };

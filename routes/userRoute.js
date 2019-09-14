@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 
 import { LOGIN_MODEL } from '../models';
 import { CREATED } from '../models/httpStatusCodes';
+import { USER_API } from '../api';
 
 const USER_ROUTER = express.Router();
 
@@ -17,23 +18,31 @@ USER_ROUTER.post('/create', (req, res, next) => {
   const PLAIN_USER_PASSWORD = req.body.password;
 
   const SALT_ROUNDS = 10;
-  bcrypt.hash(PLAIN_USER_PASSWORD, SALT_ROUNDS).then(ENCRYPTED_PASSWORD => {
+  bcrypt
+    .hash(PLAIN_USER_PASSWORD, SALT_ROUNDS)
+    .then(ENCRYPTED_PASSWORD => {
+      const USER = new LOGIN_MODEL({
+        email: NEW_USER_EMAIL,
+        password: ENCRYPTED_PASSWORD
+      });
 
-    const USER = new LOGIN_MODEL({
-      email: NEW_USER_EMAIL,
-      password: ENCRYPTED_PASSWORD
-    });
-
-    USER.save(err => {
-      if (err) {
-        next(err);
-      } else {
-        res.status(CREATED).send(`User created ${USER._id}`);
-      }
-    });
-  }).catch(err => next(err));
+      USER.save(err => {
+        if (err) {
+          next(err);
+        } else {
+          res.status(CREATED).send(`User created ${USER._id}`);
+        }
+      });
+    })
+    .catch(err => next(err));
 });
 
-USER_ROUTER.get('/:userId', (req, res, next) => {});
+// User home page
+USER_ROUTER.route('/:userId').get(USER_API.getUserById);
+
+// Get all workouts
+USER_ROUTER.route('/:userId/workouts').get();
+
+USER_ROUTER.route('/:userId/workouts/:workoutId').get();
 
 export { USER_ROUTER };

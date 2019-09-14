@@ -1,6 +1,9 @@
 import validator from 'validator';
 
-import { isAlphabetical, stringIsNullOrUndefined } from '../middleware/validator';
+import {
+  isAlphabetical,
+  stringIsNullOrUndefined
+} from '../middleware/validator';
 
 test('check if string is alphabetical or not', () => {
   // Positive tests

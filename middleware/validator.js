@@ -3,7 +3,7 @@ import validator from 'validator';
 export function validateUserEmailAndPassword(req, res, next) {
   const UNVERIFIED_USER_EMAIL = req.body.email;
   const UNVERIFIED_USER_PASSWORD = req.body.password;
-  
+
   validateEmail(UNVERIFIED_USER_EMAIL);
   stringIsNullOrUndefined(UNVERIFIED_USER_PASSWORD);
   validator.isEmpty(UNVERIFIED_USER_PASSWORD);

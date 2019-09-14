@@ -62,3 +62,7 @@ typings/
 
 # build folder
 /build
+
+# lock files
+package-lock.json
+yarn.lock
