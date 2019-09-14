@@ -5,47 +5,102 @@ import {
   stringIsNullOrUndefined
 } from '../middleware/validator';
 
-test('check if string is alphabetical or not', () => {
+describe('check if string is alphabetical or not', () => {
   // Positive tests
-  expect(isAlphabetical('string')).toBe(true);
+  test('lower case alphabetical string', () => {
+    expect(isAlphabetical('abcdefghijklmnopqrstuvwxzy')).toBe(true);
+  });
+
+  test('upper case alphabetical string', () => {
+    expect(isAlphabetical('ABCDEFQRSTUVWXZY')).toBe(true);
+  });
 
   // Negative tests
-  expect(isAlphabetical('1234567890')).toBe(false);
-  expect(isAlphabetical('!"#¤%&/()=?')).toBe(false);
-  expect(isAlphabetical('String with  whitespaces')).toBe(false);
+  test('lower case swedish characters (åäö)', () => {
+    expect(isAlphabetical('åäö')).toBe(false);
+  });
+
+  test('lower case swedish characters (ÅÄÖ)', () => {
+    expect(isAlphabetical('ÅÄÖ')).toBe(false);
+  });
+
+  test('numeric string is not alphabetical', () => {
+    expect(isAlphabetical('1234567890')).toBe(false);
+  });
+
+  test('special characters are not alphabetical', () => {
+    expect(isAlphabetical('!"#¤%&/()=?')).toBe(false);
+  });
+
+  test('whitespaces are not alphabetical', () => {
+    expect(isAlphabetical(' \t\n')).toBe(false);
+  });
 });
 
-test('check if string is an email', () => {
+describe('check if string is an email', () => {
   // Positive tests
-  expect(validator.isEmail('emil@google.com')).toBe(true);
+  test('valid email is indeed an email', () => {
+    expect(validator.isEmail('emil@google.com')).toBe(true);
+  });
 
   // Negative tests
-  expect(validator.isEmail('@google.com')).toBe(false);
-  expect(validator.isEmail('e@google')).toBe(false);
-  expect(validator.isEmail('e@')).toBe(false);
-  expect(validator.isEmail('')).toBe(false);
+  test('only full domain is not an email', () => {
+    expect(validator.isEmail('@google.com')).toBe(false);
+  });
+  
+  test('only partial domain is not an email', () => {
+    expect(validator.isEmail('e@google')).toBe(false);
+  });
+  
+  test('without domain is not an email', () => {
+    expect(validator.isEmail('e@')).toBe(false);
+  });
+  
+  test('empty string is not an email', () => {
+    expect(validator.isEmail('')).toBe(false);
+  });
 });
 
-test('check if string is empty', () => {
+describe('check if string is empty', () => {
   // Positive tests
-  expect(validator.isEmpty('')).toBe(true);
+  test('an empty string is empty', () => {
+    expect(validator.isEmpty('')).toBe(true);
+  });
 
   // Negative tests
-  expect(validator.isEmpty('str123')).toBe(false);
-  expect(validator.isEmpty(' ')).toBe(false);
-  expect(validator.isEmpty('  ')).toBe(false);
-  expect(validator.isEmpty('\n')).toBe(false);
+  test('string that is not empty is not empty', () => {
+    expect(validator.isEmpty('str123')).toBe(false);
+  });
+  
+  test('string with whitespace', () => {
+    expect(validator.isEmpty(' ')).toBe(false);
+  });
+
+  test('string with tab is not empty', () => {
+    expect(validator.isEmpty('  ')).toBe(false);
+  });
+  
+  test('string with new line is not empty', () => {
+    expect(validator.isEmpty('\n')).toBe(false);
+  });
 });
 
-test('check if string is not null or undefined', () => {
+describe('check if string is not null or undefined', () => {
   // Positive tests
-  expect(stringIsNullOrUndefined('')).toBe(undefined);
+  test('string that is empty to be undefined', () => {
+    expect(stringIsNullOrUndefined('')).toBe(undefined);
+  });
 
   // Negative tests
-  expect(() => {
-    stringIsNullOrUndefined(null);
-  }).toThrow('String is null or undefined.');
-  expect(() => {
-    stringIsNullOrUndefined(undefined);
-  }).toThrow('String is null or undefined.');
+  test('null to throw Error', () => {
+    expect(() => {
+      stringIsNullOrUndefined(null);
+    }).toThrow('String is null or undefined.');
+  });
+  
+  test('undefined to throw Error', () => {
+    expect(() => {
+      stringIsNullOrUndefined(undefined);
+    }).toThrow('String is null or undefined.');
+  });
 });
