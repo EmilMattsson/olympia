@@ -1,6 +1,6 @@
 import validator from 'validator';
 
-import { isAlphabetical } from '../middleware/validator';
+import { isAlphabetical, stringIsNullOrUndefined } from '../middleware/validator';
 
 test('checks if string is alphabetical or not', () => {
   // Positive tests
@@ -21,4 +21,28 @@ test('check if string is an email', () => {
   expect(validator.isEmail('e@google')).toBe(false);
   expect(validator.isEmail('e@')).toBe(false);
   expect(validator.isEmail('')).toBe(false);
+});
+
+test('checks if string is empty', () => {
+  // Positive tests
+  expect(validator.isEmpty('')).toBe(true);
+
+  // Negative tests
+  expect(validator.isEmpty('str123')).toBe(false);
+  expect(validator.isEmpty(' ')).toBe(false);
+  expect(validator.isEmpty('  ')).toBe(false);
+  expect(validator.isEmpty('\n')).toBe(false);
+});
+
+test('checks if string is not null or undefined', () => {
+  // Positive tests
+  expect(stringIsNullOrUndefined('')).toBe(undefined);
+
+  // Negative tests
+  expect(() => {
+    stringIsNullOrUndefined(null);
+  }).toThrow('String is null or undefined.');
+  expect(() => {
+    stringIsNullOrUndefined(undefined);
+  }).toThrow('String is null or undefined.');
 });
