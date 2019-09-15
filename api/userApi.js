@@ -3,9 +3,9 @@ import { USER_SERVICE } from '../services';
 export const USER_API = {
   getUserById: async (req, res, next) => {
     try {
-      const USER_ID = req.params.userId;
+      const USER_EMAIL = req.params.email;
 
-      const user = await USER_SERVICE.getUserById(USER_ID);
+      const user = await USER_SERVICE.getUserByEmail(USER_EMAIL);
 
       res.json(user);
     } catch (err) {
